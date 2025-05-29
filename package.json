@@ -1,0 +1,23 @@
+{
+  "name": "e-commerce",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Garv-s/E-commerce.git"
+  },
+  "author": "Garv_Shah",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Garv-s/E-commerce/issues"
+  },
+  "homepage": "https://github.com/Garv-s/E-commerce#readme",
+  "dependencies": {
+    "knex": "^3.1.0",
+    "pg": "^8.16.0"
+  }
+}
