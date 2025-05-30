@@ -6,9 +6,18 @@
 module.exports = {
 
   development: {
-    client: 'sqlite3',
+    client: 'postgresql',
     connection: {
-      filename: './dev.sqlite3'
+      database: 'my_db',
+      user:     'postgres',
+      password: 'root'
+    },
+    pool: {
+      min: 2,
+      max: 10
+    },
+    migrations: {
+      tableName: 'users'
     }
   },
 
@@ -16,7 +25,7 @@ module.exports = {
     client: 'postgresql',
     connection: {
       database: 'my_db',
-      user:     'localhost',
+      user:     'postgres',
       password: 'root'
     },
     pool: {
@@ -32,7 +41,7 @@ module.exports = {
     client: 'postgresql',
     connection: {
       database: 'my_db',
-      user:     'localhost',
+      user:     'postgres',
       password: 'root'
     },
     pool: {
