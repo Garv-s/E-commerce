@@ -27,7 +27,7 @@ exports.signup = async (req, res) => {
 
     const [user] = await db('users')
       .insert({ email, password: hashedPassword })
-      .returning(['id', 'email']); // PostgreSQL returning inserted row
+      .returning(['id', 'email']); 
 
     const token = createToken(user);
     res.status(201).json({ token });
