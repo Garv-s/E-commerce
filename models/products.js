@@ -1,0 +1,12 @@
+// models/productModel.js
+const knex = require('../Product_Management/db');
+
+exports.createProduct = (product) => knex('products').insert(product).returning('*');
+
+exports.getAllProducts = () => knex('products').select('*');
+
+exports.getProductById = (id) => knex('products').where({ id }).first();
+
+exports.updateProduct = (id, product) => knex('products').where({ id }).update(product).returning('*');
+
+exports.deleteProduct = (id) => knex('products').where({ id }).del();
