@@ -1,6 +1,6 @@
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
-const db = require('./db');
+const db = require('../db');
 
 const createToken = (user) => {
   const JWT_SECRET = "mySuperSecretKey123";         

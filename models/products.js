@@ -1,5 +1,5 @@
 // models/productModel.js
-const knex = require('../Product_Management/db');
+const knex = require('../db');
 
 exports.createProduct = (product) => knex('products').insert(product).returning('*');
 

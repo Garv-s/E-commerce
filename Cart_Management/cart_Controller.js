@@ -1,0 +1,30 @@
+// CartController.js
+const db = require('../db');
+
+exports.addToCart = async (req, res) => {
+  const { product_id, quantity } = req.body;
+  const user_id = req.user.id;
+
+  try {
+    await db('cart_items').insert({ user_id, product_id, quantity });
+    res.status(201).json({ message: 'Item added to cart' });
+  } catch (err) {
+    console.error("Add to cart error:", err);
+    res.status(500).json({ message: 'Server error' });
+  }
+};
+
+exports.viewCart = async (req, res) => {
+  const user_id = req.user.id;
+
+  try {
+    const items = await db('cart_items')
+      .join('products', 'cart_items.product_id', 'products.id')
+      .select('products.name', 'products.price', 'cart_items.quantity')
+      .where('cart_items.user_id', user_id);
+      
+    res.json(items);
+  } catch (err) {
+    res.status(500).json({ message: 'Server error' });
+  }
+};
