@@ -1,4 +1,4 @@
-const db = require('../db');
+const db = require('../../db');
 
 exports.addToCart = async (req, res) => {
   const { product_id, quantity } = req.body;

@@ -1,5 +1,5 @@
 // OrderController.js
-const db = require("../db");
+const db = require("../../db");
 
 exports.placeOrder = async (req, res) => {
   const user_id = req.user.id;

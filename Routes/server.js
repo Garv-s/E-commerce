@@ -1,10 +1,10 @@
 require('dotenv').config();
 const express = require('express');
-const authRoutes = require('./authentication/authRoutes');
-const productRoutes = require('./Product_Management/ProductRoutes');
-const cartRoutes = require('./Cart_Management/Cart_Routes');
-const orderRoutes = require('./Cart_Management/Order_Routes');
-const authMiddleware = require('./authentication/authMiddleware');
+const authRoutes = require('./authRoutes');
+const productRoutes = require('./ProductRoutes');
+const cartRoutes = require('./Cart_Routes');
+const orderRoutes = require('./Order_Routes');
+const authMiddleware = require('../Controllers/auth/authMiddleware');
 const Razorpay = require('razorpay');
 
 const app = express();
