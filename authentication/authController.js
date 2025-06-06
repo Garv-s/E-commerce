@@ -1,9 +1,10 @@
+require('dotenv').config();
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 const db = require('../db');
 
 const createToken = (user) => {
-  const JWT_SECRET = "mySuperSecretKey123";         
+  const JWT_SECRET = process.env.JWT_SECRET;         
   const JWT_EXPIRES_IN = "1h";                      
 
   return jwt.sign(
