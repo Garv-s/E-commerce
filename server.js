@@ -4,10 +4,11 @@ const authRoutes = require('./authentication/authRoutes');
 const productRoutes = require('./Product_Management/ProductRoutes');
 const cartRoutes = require('./Cart_Management/Cart_Routes');
 const orderRoutes = require('./Cart_Management/Order_Routes');
+const Razorpay = require('razorpay');
 
 const app = express();
 
-app.use(express.json()); // Parse JSON bodies
+app.use(express.json()); 
 
 app.use('/api/auth', authRoutes);
 app.use('/api/products', productRoutes);
