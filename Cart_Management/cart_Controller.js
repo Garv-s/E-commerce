@@ -1,4 +1,3 @@
-// CartController.js
 const db = require('../db');
 
 exports.addToCart = async (req, res) => {
@@ -41,25 +40,25 @@ exports.addToCart = async (req, res) => {
   }
 };
 
-// exports.removeFromCart = async (req, res) => {
-//   const { product_id } = req.body;
-//   const user_id = req.user.id;
+exports.removeFromCart = async (req, res) => {
+  const { product_id } = req.body;
+  const user_id = req.user.id;
 
-//   try {
-//     const deletedRows = await db('cart_items')
-//       .where({ user_id, product_id })
-//       .del();
+  try {
+    const deletedRows = await db('cart_items')
+      .where({ user_id, product_id })
+      .del();
 
-//     if (deletedRows === 0) {
-//       return res.status(404).json({ message: 'Item not found in cart' });
-//     }
+    if (deletedRows === 0) {
+      return res.status(404).json({ message: 'Item not found in cart' });
+    }
 
-//     res.status(200).json({ message: 'Item removed from cart' });
-//   } catch (err) {
-//     console.error("Remove from cart error:", err);
-//     res.status(500).json({ message: 'Server error' });
-//   }
-// };
+    res.status(200).json({ message: 'Item removed from cart' });
+  } catch (err) {
+    console.error("Remove from cart error:", err);
+    res.status(500).json({ message: 'Server error' });
+  }
+};
 
 exports.viewCart = async (req, res) => {
   const user_id = req.user.id;
