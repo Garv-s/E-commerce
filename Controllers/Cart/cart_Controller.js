@@ -1,8 +1,15 @@
 const db = require('../../db');
 
+
 exports.addToCart = async (req, res) => {
-  const { product_id, quantity } = req.body;
   const user_id = req.user.id;
+  const { product_id, quantity } = req.body;
+  const id=product_id;
+  const prod=await db('products').where({id}).first();
+  if (!prod){
+    return res.status(404).json({error:"Product id does not exist"});
+  }
+  else{
 
   try {
     const existingItem = await db('cart_items')
@@ -10,6 +17,18 @@ exports.addToCart = async (req, res) => {
       .first();
 
     if (existingItem) {
+      const q=prod.quantity;
+      const result = await db('cart_items')
+        .where({ user_id, product_id });
+
+      const qe = result[0].quantity;
+
+      //console.log(q);
+      //console.log(qe);
+      if (prod.quantity<(existingItem.quantity+quantity)){
+        return res.status(404).json({error:"Maximum quantity you can add is "+(q-qe)+" units"})
+      }
+
       await db('cart_items')
         .where({ user_id, product_id })
         .update({
@@ -26,6 +45,10 @@ exports.addToCart = async (req, res) => {
             }
       res.status(200).json({ message: 'Cart item updated' });
     } else {
+      const qty=prod.quantity;
+      if (prod.quantity<(quantity)){
+        return res.status(404).json({error:"Maximum available quantity is "+(qty)+" units"})
+      }
       await db('cart_items').insert({
         user_id,
         product_id,
@@ -37,7 +60,7 @@ exports.addToCart = async (req, res) => {
   } catch (err) {
     console.error("Add to cart error:", err);
     res.status(500).json({ message: 'Server error' });
-  }
+  }}
 };
 
 exports.removeFromCart = async (req, res) => {
