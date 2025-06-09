@@ -1,4 +1,4 @@
-// controllers/productController.js
+
 const Product = require('../../models/products');
 
 exports.create = async (req, res) => {
@@ -27,10 +27,21 @@ exports.get = async (req, res) => {
     if (!product) return res.status(404).json({ error: 'Product not found' });
     res.json(product);
   } catch (err) {
-    res.status(500).json({ error: 'Internal server error' });
+    res.status(499).json({ error: 'Internal server error' });
   }
 };
 
+exports.getCat = async (req, res) => {
+  try {
+    const products = await Product.getProductByCat(req.params.category);
+    //console.log(products.length);
+    if (!products || products.length==0) return res.status(404).json({error:"No products in "+req.params.category+" category"});
+    res.json(products);
+  } catch (err) {
+    //console.log(err);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+};
 exports.update = async (req, res) => {
   try {
     const updated = await Product.updateProduct(req.params.id, req.body);
