@@ -1,7 +1,6 @@
+import Product from '../../models/products.js';
 
-const Product = require('../../models/products');
-
-exports.create = async (req, res) => {
+const create = async (req, res) => {
   try {
     const newProduct = await Product.createProduct(req.body);
     res.status(201).json(newProduct[0]);
@@ -11,7 +10,7 @@ exports.create = async (req, res) => {
   }
 };
 
-exports.list = async (req, res) => {
+const list = async (req, res) => {
   try {
     const products = await Product.getAllProducts();
     res.json(products);
@@ -21,7 +20,7 @@ exports.list = async (req, res) => {
   }
 };
 
-exports.get = async (req, res) => {
+const get = async (req, res) => {
   try {
     const product = await Product.getProductById(req.params.id);
     if (!product) return res.status(404).json({ error: 'Product not found' });
@@ -31,7 +30,7 @@ exports.get = async (req, res) => {
   }
 };
 
-exports.getCat = async (req, res) => {
+const getCat = async (req, res) => {
   try {
     const products = await Product.getProductByCat(req.params.category);
     //console.log(products.length);
@@ -42,7 +41,7 @@ exports.getCat = async (req, res) => {
     res.status(500).json({ error: 'Internal server error' });
   }
 };
-exports.update = async (req, res) => {
+const update = async (req, res) => {
   try {
     const updated = await Product.updateProduct(req.params.id, req.body);
     res.json(updated[0]);
@@ -51,11 +50,20 @@ exports.update = async (req, res) => {
   }
 };
 
-exports.remove = async (req, res) => {
+const remove = async (req, res) => {
   try {
     await Product.deleteProduct(req.params.id);
     res.json({ message: 'Product deleted' });
   } catch (err) {
     res.status(500).json({ error: 'Internal server error' });
   }
+};
+
+export default {
+  create,
+  list,
+  get,
+  getCat,
+  update,
+  remove
 };

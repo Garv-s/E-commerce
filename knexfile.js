@@ -1,7 +1,7 @@
 /**
  * @type { Object.<string, import("knex").Knex.Config> }
  */
-module.exports = {
+const exports = {
 
   development: {
     client: 'pg',
@@ -20,3 +20,5 @@ module.exports = {
   },
 
 }
+
+export default exports;

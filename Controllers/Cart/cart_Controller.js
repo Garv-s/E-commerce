@@ -1,7 +1,7 @@
-const db = require('../../db');
+import db from '../../db.js';
 
 
-exports.addToCart = async (req, res) => {
+const addToCart = async (req, res) => {
   const user_id = req.user.id;
   const { product_id, quantity } = req.body;
   const id=product_id;
@@ -63,7 +63,7 @@ exports.addToCart = async (req, res) => {
   }}
 };
 
-exports.removeFromCart = async (req, res) => {
+const removeFromCart = async (req, res) => {
   const { product_id } = req.body;
   const user_id = req.user.id;
 
@@ -83,7 +83,7 @@ exports.removeFromCart = async (req, res) => {
   }
 };
 
-exports.viewCart = async (req, res) => {
+const viewCart = async (req, res) => {
   const user_id = req.user.id;
 
   try {
@@ -96,4 +96,10 @@ exports.viewCart = async (req, res) => {
   } catch (err) {
     res.status(500).json({ message: 'Server error' });
   }
+};
+
+export default {
+  addToCart,
+  removeFromCart,
+  viewCart
 };

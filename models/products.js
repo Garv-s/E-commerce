@@ -1,14 +1,23 @@
 // models/productModel.js
-const knex = require('../db');
+import knex from '../db.js';
 
-exports.createProduct = (product) => knex('products').insert(product).returning('*');
+const createProduct = (product) => knex('products').insert(product).returning('*');
 
-exports.getAllProducts = () => knex('products').select('*');
+const getAllProducts = () => knex('products').select('*');
 
-exports.getProductById = (id) => knex('products').where({ id }).first();
+const getProductById = (id) => knex('products').where({ id }).first();
 
-exports.getProductByCat = (category) => knex('products').where( 'category',category );;
+const getProductByCat = (category) => knex('products').where( 'category',category );;
 
-exports.updateProduct = (id, product) => knex('products').where({ id }).update(product).returning('*');
+const updateProduct = (id, product) => knex('products').where({ id }).update(product).returning('*');
 
-exports.deleteProduct = (id) => knex('products').where({ id }).del();
+const deleteProduct = (id) => knex('products').where({ id }).del();
+
+export default {
+    createProduct,
+    getAllProducts,
+    getProductByCat,
+    getProductById,
+    updateProduct,
+    deleteProduct
+}

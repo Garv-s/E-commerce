@@ -1,6 +1,7 @@
-const jwt = require('jsonwebtoken');
-require('dotenv').config();
-exports.verifyToken = (req, res, next) => {
+import jwt from 'jsonwebtoken';
+import dotenv from 'dotenv';
+dotenv.config();
+const verifyToken = (req, res, next) => {
   const authHeader = req.headers['authorization'];
   const token = authHeader && authHeader.split(' ')[1]; // Expected format: "Bearer TOKEN"
 
@@ -16,4 +17,8 @@ exports.verifyToken = (req, res, next) => {
   } catch (err) {
     return res.status(403).json({ message: 'Invalid or expired token' });
   }
+};
+
+export {
+  verifyToken
 };

@@ -1,7 +1,8 @@
-require("dotenv").config();
-const jwt = require("jsonwebtoken");
-const bcrypt = require("bcryptjs");
-const db = require("../../db");
+import dotenv from 'dotenv';
+dotenv.config();
+import jwt from 'jsonwebtoken';
+import bcrypt  from 'bcryptjs';
+import db from "../../db.js";
 
 const createToken = (user) => {
   const JWT_SECRET = process.env.JWT_SECRET;
@@ -12,7 +13,7 @@ const createToken = (user) => {
   });
 };
 
-exports.signup = async (req, res) => {
+export const signup = async (req, res) => {
   const { name, email, password } = req.body;
 
   try {
@@ -37,7 +38,7 @@ exports.signup = async (req, res) => {
   }
 };
 
-exports.login = async (req, res) => {
+export const login = async (req, res) => {
   const { email, password } = req.body;
 
   try {

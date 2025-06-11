@@ -1,7 +1,6 @@
-// OrderController.js
-const db = require("../../db");
+import db from '../../db.js';
 
-exports.placeOrder = async (req, res) => {
+const placeOrder = async (req, res) => {
   const user_id = req.user.id;
   const { shipping_address, payment_method } = req.body;
 
@@ -48,7 +47,7 @@ exports.placeOrder = async (req, res) => {
   }
 };
 
-exports.orderHistory = async (req, res) => {
+const orderHistory = async (req, res) => {
   const user_id = req.user.id;
 
   try {
@@ -79,4 +78,9 @@ exports.orderHistory = async (req, res) => {
     console.log(err);
     res.status(500).json({ message: "Server error" });
   }
+};
+
+export default{
+  placeOrder,
+  orderHistory
 };

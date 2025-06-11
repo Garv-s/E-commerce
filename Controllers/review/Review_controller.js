@@ -1,5 +1,5 @@
-const db = require("../../db");
-exports.createReview = async (req, res) => {
+import db from '../../db.js';
+const createReview = async (req, res) => {
   const user_id = req.user.id;
   var { product_id, rating, comment } = req.body;
   const id = product_id;
@@ -40,7 +40,7 @@ exports.createReview = async (req, res) => {
   }
 };
 
-exports.viewReview = async (req, res) => {
+const viewReview = async (req, res) => {
   const { product_id } = req.body;
   const Reviews = await db("reviews").where({ product_id });
   if (!Reviews) {
@@ -69,3 +69,8 @@ exports.viewReview = async (req, res) => {
     }
   }
 };
+
+export default{
+  createReview,
+  viewReview
+}
