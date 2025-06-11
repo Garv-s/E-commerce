@@ -19,7 +19,7 @@ exports.createReview = async (req, res) => {
       if (!rating) {
         rating = existingReview.rating;
       }
-      await db("reviews").where({ id, user_id, product_id }).update({
+      await db("reviews").where({ id: rid, user_id, product_id }).update({
         comment: comment,
         rating: rating,
       });
@@ -57,14 +57,12 @@ exports.viewReview = async (req, res) => {
         count += 1;
       }
       const averageRating = sum / count;
-      console.log(Reviews.comment);
-      res
-        .status(200)
-        .json({
-          no_of_reviews: count,
-          average_rating: averageRating,
-          reviews: Reviews,
-        });
+      //console.log(Reviews.comment);
+      res.status(200).json({
+        no_of_reviews: count,
+        average_rating: averageRating,
+        reviews: Reviews,
+      });
     } catch (error) {
       console.log(error);
       res.status(500).json({ error: "server error" });
