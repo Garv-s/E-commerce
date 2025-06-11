@@ -52,7 +52,7 @@ exports.orderHistory = async (req, res) => {
   const user_id = req.user.id;
 
   try {
-    const orders = await db("orders")
+    const orders = await db("user_orders")
       .where({ user_id })
       .orderBy("ordered_at", "desc");
 
@@ -63,7 +63,7 @@ exports.orderHistory = async (req, res) => {
           .select(
             "products.name",
             "user_order_items.quantity",
-            "order_items.price"
+            "user_order_items.price"
           )
           .where("user_order_items.order_id", order.id);
 
@@ -76,6 +76,7 @@ exports.orderHistory = async (req, res) => {
 
     res.json(detailedOrders);
   } catch (err) {
+    console.log(err);
     res.status(500).json({ message: "Server error" });
   }
 };
