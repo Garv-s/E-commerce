@@ -1,19 +1,19 @@
-require('dotenv').config();
-const express = require('express');
+require("dotenv").config();
+const express = require("express");
 const router = express.Router();
-const authRoutes = require('./authRoutes');
-const productRoutes = require('./ProductRoutes');
-const cartRoutes = require('./Cart_Routes');
-const orderRoutes = require('./Order_Routes');
-const reviewRoutes = require('./Review_Routes');
-const authMiddleware = require('../Controllers/auth/authMiddleware');
-const Razorpay = require('razorpay');
+const authRoutes = require("./authRoutes");
+const productRoutes = require("./ProductRoutes");
+const cartRoutes = require("./Cart_Routes");
+const orderRoutes = require("./Order_Routes");
+const reviewRoutes = require("./Review_Routes");
+const authMiddleware = require("../Controllers/auth/authMiddleware");
+const Razorpay = require("razorpay");
 
-router.use(express.json()); 
+router.use(express.json());
 
-router.use('/auth', authRoutes);
-router.use('/products', authMiddleware.verifyToken,  productRoutes);
-router.use('/cart', authMiddleware.verifyToken,  cartRoutes);
-router.use('/order', authMiddleware.verifyToken,  orderRoutes);
-router.use('/review', authMiddleware.verifyToken,  reviewRoutes);
+router.use("/auth", authRoutes);
+router.use("/products", authMiddleware.verifyToken, productRoutes);
+router.use("/cart", authMiddleware.verifyToken, cartRoutes);
+router.use("/order", authMiddleware.verifyToken, orderRoutes);
+router.use("/review", authMiddleware.verifyToken, reviewRoutes);
 module.exports = router;
