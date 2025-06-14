@@ -2,12 +2,12 @@ import dotenv from 'dotenv';
 dotenv.config();
 import express from 'express';
 const router = express.Router();
-import authRoutes from './authRoutes.js';
-import productRoutes from './ProductRoutes.js';
-import cartRoutes from './Cart_Routes.js';
-import orderRoutes from './Order_Routes.js';
-import reviewRoutes from './Review_Routes.js';
-import {verifyToken} from "../Controllers/auth/authMiddleware.js";
+import authRoutes from './auth.routes.js';
+import productRoutes from './product.routes.js';
+import cartRoutes from './cart.routes.js';
+import orderRoutes from './order.routes.js';
+import reviewRoutes from './review.routes.js';
+import {verifyToken} from "../middleware/auth.middleware.js";
 import Razorpay from 'razorpay';
 
 router.use(express.json());

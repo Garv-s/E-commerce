@@ -2,7 +2,7 @@ import dotenv from "dotenv";
 dotenv.config();
 import jwt from "jsonwebtoken";
 import bcrypt from "bcryptjs";
-import db from "../../db.js";
+import db from "../db.js";
 
 const createToken = (user) => {
   const JWT_SECRET = process.env.JWT_SECRET;

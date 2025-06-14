@@ -1,7 +1,7 @@
 
 import express from 'express';
 const router = express.Router();
-import cartController from "../Controllers/Cart/cart_Controller.js";
+import cartController from "../Controllers/cart.controller.js";
 
 router.post('/',cartController.addToCart);
 router.get('/',cartController.viewCart);

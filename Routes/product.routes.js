@@ -1,7 +1,7 @@
 
 import express from 'express';
 const router = express.Router();
-import productController from "../Controllers/Product/ProductController.js";
+import productController from "../Controllers/product.controller.js";
 
 
 router.post('/add', productController.create);

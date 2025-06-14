@@ -1,4 +1,4 @@
-import db from "../../db.js";
+import db from "../db.js";
 import nodemailer from "nodemailer";
 
 const placeOrder = async (req, res) => {
