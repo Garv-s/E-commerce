@@ -1,7 +1,7 @@
-import dotenv from 'dotenv';
+import dotenv from "dotenv";
 dotenv.config();
-import jwt from 'jsonwebtoken';
-import bcrypt  from 'bcryptjs';
+import jwt from "jsonwebtoken";
+import bcrypt from "bcryptjs";
 import db from "../../db.js";
 
 const createToken = (user) => {

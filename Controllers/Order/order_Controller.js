@@ -1,4 +1,5 @@
-import db from '../../db.js';
+import db from "../../db.js";
+import nodemailer from "nodemailer";
 
 const placeOrder = async (req, res) => {
   const user_id = req.user.id;
@@ -39,6 +40,26 @@ const placeOrder = async (req, res) => {
     }
 
     await db("cart_items").where({ user_id }).del();
+    const transporter = nodemailer.createTransport({
+      host: "smtp.ethereal.email",
+      port: 587,
+      secure: false,
+      auth: {
+        user: "judah.bednar@ethereal.email",
+        pass: "HfAVeQ6vZJJWBndDfP",
+      },
+    });
+    (async () => {
+      const info = await transporter.sendMail({
+        from: '"Judah Bednar" <judah.bednar@ethereal.email>',
+        to: req.user.email,
+        subject: "Order placed",
+        text: "Your Order is successfully placed. Order id: " + order.id,
+        html: "<b>Hello world?</b>", // HTML body
+      });
+      console.log(req.user.email);
+      console.log("Message sent:", info.messageId);
+    })();
 
     res.json({ message: "Order placed successfully", orderId: order.id });
   } catch (err) {
@@ -80,7 +101,7 @@ const orderHistory = async (req, res) => {
   }
 };
 
-export default{
+export default {
   placeOrder,
-  orderHistory
+  orderHistory,
 };

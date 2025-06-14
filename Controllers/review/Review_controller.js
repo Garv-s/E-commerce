@@ -1,4 +1,4 @@
-import db from '../../db.js';
+import db from "../../db.js";
 const createReview = async (req, res) => {
   const user_id = req.user.id;
   var { product_id, rating, comment } = req.body;
@@ -70,7 +70,7 @@ const viewReview = async (req, res) => {
   }
 };
 
-export default{
+export default {
   createReview,
-  viewReview
-}
+  viewReview,
+};
