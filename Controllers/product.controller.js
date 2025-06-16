@@ -12,35 +12,40 @@ const create = async (req, res) => {
 
 const list = async (req, res) => {
   try {
-    const products = await Product.getAllProducts();
-    res.json(products);
+    const { id, category } = req.body;
+    if (!id && !category) {
+      const products = await Product.getAllProducts();
+      res.json(products);
+    } else {
+      if (id) {
+        try {
+          const product = await Product.getProductById(id);
+          if (!product)
+            return res.status(404).json({ error: "Product not found" });
+          res.json(product);
+        } catch (err) {
+          res.status(499).json({ error: "Internal server error" });
+        }
+      }
+      if (category) {
+        try {
+          const products = await Product.getProductByCat(category);
+          //console.log(products.length);
+          if (!products || products.length == 0)
+            return res
+              .status(404)
+              .json({
+                error: "No products in " + req.params.category + " category",
+              });
+          res.json(products);
+        } catch (err) {
+          //console.log(err);
+          res.status(500).json({ error: "Internal server error" });
+        }
+      }
+    }
   } catch (err) {
     console.log(err);
-    res.status(500).json({ error: "Internal server error" });
-  }
-};
-
-const get = async (req, res) => {
-  try {
-    const product = await Product.getProductById(req.params.id);
-    if (!product) return res.status(404).json({ error: "Product not found" });
-    res.json(product);
-  } catch (err) {
-    res.status(499).json({ error: "Internal server error" });
-  }
-};
-
-const getCat = async (req, res) => {
-  try {
-    const products = await Product.getProductByCat(req.params.category);
-    //console.log(products.length);
-    if (!products || products.length == 0)
-      return res
-        .status(404)
-        .json({ error: "No products in " + req.params.category + " category" });
-    res.json(products);
-  } catch (err) {
-    //console.log(err);
     res.status(500).json({ error: "Internal server error" });
   }
 };
@@ -65,8 +70,6 @@ const remove = async (req, res) => {
 export default {
   create,
   list,
-  get,
-  getCat,
   update,
   remove,
 };
