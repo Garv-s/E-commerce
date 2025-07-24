@@ -1,5 +1,5 @@
 // models/productModel.js
-import knex from '../db.js';
+import knex from '../../db.js';
 
 const createProduct = (product) => knex('products').insert(product).returning('*');
 

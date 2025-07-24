@@ -3,7 +3,7 @@ dotenv.config();
 import express from 'express';
 import routes from './Routes/routes.js';
 import swaggerUi from 'swagger-ui-express';
-import swaggerDoc from './swagger-output.json' assert { type: 'json' };
+import swaggerDoc from '../swagger-output.json' assert { type: 'json' };
 
 
 const app = express();

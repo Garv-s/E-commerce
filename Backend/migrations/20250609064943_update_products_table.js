@@ -1,4 +1,4 @@
-const { table } = require("../db");
+const { table } = require("../../db");
 
 /**
  * @param { import("knex").Knex } knex
